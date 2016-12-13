@@ -164,7 +164,7 @@ public:
 		@brief		sum of all elements squared
 		Sums all matrix elements squared.
 	*/
-	T sumSq() const;
+	T magnitudeSq() const;
 
 	/**
 		@brief		matrix magnitude
@@ -447,7 +447,7 @@ inline T Matrix<n, m, T>::sum() const {
 }
 
 template<uint n, uint m, typename T>
-T Matrix<n, m, T>::sumSq() const {
+T Matrix<n, m, T>::magnitudeSq() const {
 	T ans = 0;
 	for (int i = 0; i < n * m; ++i) {
 		ans += at_(0, i) * at_(0, i);
@@ -457,9 +457,9 @@ T Matrix<n, m, T>::sumSq() const {
 
 template<uint n, uint m, typename T>
 T Matrix<n, m, T>::magnitude() const {
-	if (std::is_same<T, float>::value)			return std::sqrtf(sumSq());
-	else if (std::is_same<T, double>::value)	return std::sqrt(sumSq());
-	else if (std::is_same<T, long>::value)		return std::sqrtl(sumSq());
+	if (std::is_same<T, float>::value)			return std::sqrtf(magnitudeSq());
+	else if (std::is_same<T, double>::value)	return std::sqrt(magnitudeSq());
+	else if (std::is_same<T, long>::value)		return std::sqrtl(magnitudeSq());
 }
 
 template<uint n, uint m, typename T>
