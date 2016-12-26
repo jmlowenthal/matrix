@@ -2,8 +2,12 @@
 
 #pragma once
 
+#ifndef MATRIX_H
+#define MATRIX_H
+
 #include <exception>
 #include <array>
+#include <cmath>
 
 typedef unsigned int uint;
 
@@ -216,7 +220,7 @@ private:
 		@brief		construct element matrix
 		@param m	matrix data source
 	*/
-	ElementMatrix(const Matrix<n, m, T>& m) : lhs(m) {};
+	ElementMatrix(const Matrix<n, m, T>& mat) : lhs(mat) {};
 
 public:
 	/**
@@ -321,7 +325,7 @@ template<uint n, uint m, typename T>
 inline Matrix<n, m, T> Matrix<n, m, T>::operator-() const {
 	Matrix<n, m, T> ret;
 	for (int i = 0; i < n * m; ++i) {
-		ret.at_(0, i) = at_(0, i);
+		ret.at_(0, i) = -at_(0, i);
 	}
 	/*for (uint i = 0; i < n; ++i) {
 		for (uint j = 0; j < m; ++j) {
@@ -457,9 +461,7 @@ T Matrix<n, m, T>::magnitudeSq() const {
 
 template<uint n, uint m, typename T>
 T Matrix<n, m, T>::magnitude() const {
-	if (std::is_same<T, float>::value)			return std::sqrtf(magnitudeSq());
-	else if (std::is_same<T, double>::value)	return std::sqrt(magnitudeSq());
-	else if (std::is_same<T, long>::value)		return std::sqrtl(magnitudeSq());
+	return std::sqrt(magnitudeSq());
 }
 
 template<uint n, uint m, typename T>
@@ -522,3 +524,5 @@ Matrix<n, m, T> ElementMatrix<n, m, T>::operator/(Matrix<n, m, T> rhs) {
 }
 
 #pragma endregion
+
+#endif
